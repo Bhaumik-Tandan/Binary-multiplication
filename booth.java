@@ -1,52 +1,53 @@
 import java.util.Scanner;
 
 public class a {
-    static int n;
-    static String pad(String qr,int br)
+    static int n,sc;
+    static String qr,br,ac;
+    static String pad(String k)
     {
         String s="";
-        for(int i=0;i<br-qr.length();i++)
+        for(int i=0;i<n-k.length();i++)
         s+="0";
-        return s+qr;
+        return s+k;
     }
 
     static String add(String p,String d)
     {
-        int l=n-1;
+        int i=n-1;
         int c=0;
-        int a;
-        while(l>=0){
-            a=(Character.getNumericValue((d.charAt(l)))^(Character.getNumericValue((p.charAt(l)))))^c;
-            c=(Character.getNumericValue((d.charAt(l)))&(Character.getNumericValue((p.charAt(l)))))|(c&((Character.getNumericValue((p.charAt(l)))^Character.getNumericValue((d.charAt(l))))));
-            d=d.substring(0,l)+Integer.toString(a)+d.substring(l+1);
-        l-=1;}
+        int s,a,b;
+        while(i>=0)
+        {
+            a=Character.getNumericValue(p.charAt(i));
+            b=Character.getNumericValue(d.charAt(i));
+            s=(a^b)^c;
+            c=a&b|c&(a^b);
+            d=d.substring(0,i)+s+d.substring(i+1);
+            i-=1;
+        }
         return d;
-
     }
-    static void mul(String qr,String br)
+    static void mul()
     {
         System.out.printf("%20s %10s %10s %10s %5s\n","Comment","AC","QR","Q(n+1)","SC");
-        int sc=n;
-        String ac=pad("0",n);
         char q1='0';
         System.out.printf("%20s %10s %10s %10s %5s\n","",ac,qr,q1,sc);
         while(sc>0)
         {
             //condition for 10 we will subtract
-            if(q1=='0' && qr.charAt(n-1)=='1')
+            if(qr.charAt(n-1)=='1' && q1=='0')
             {
                String s="";
                for(int i=0;i<n;i++)
                s=s+(br.charAt(i)=='0'?"1":"0");//finding complement
-               s=add(pad("1",n),s);//2's complement
+               s=add(pad("1"),s);//2's complement
                System.out.printf("%20s %10s\n","AC+BR'+1",s);
                ac=add(ac,s);
                System.out.printf("%20s %10s\n","",ac);
             }
-            else if(q1=='1' && qr.charAt(n-1)=='0')
-            {
-                System.out.printf("%20s %10s\n","AC+BR",br);
-               String s="";
+            else if(qr.charAt(n-1)=='0' && q1=='1')
+            { 
+               System.out.printf("%20s %10s\n","AC+BR",br);
                ac=add(ac,br);
                System.out.printf("%20s %10s\n","",ac);
             }
@@ -60,12 +61,14 @@ public class a {
 
     public static void main(String[] args)  {
         Scanner s=new Scanner(System.in);
-        System.out.print("Enter the Multiplier: ");
-        String qr=s.next();
-        System.out.print("\nEnter the Multiplicand: ");
-        String br=s.next();
         System.out.print("\nEnter the Number of bits: ");
         n=s.nextInt();
-        mul(pad(qr,n),pad(br,n));
+        System.out.print("Enter the Multiplier: ");
+        qr=pad(s.next());
+        System.out.print("\nEnter the Multiplicand: ");
+        br=pad(s.next());
+        ac=pad("");
+        sc=n;
+        mul();
     }
 }

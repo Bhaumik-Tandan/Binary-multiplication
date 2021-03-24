@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class a {
+public class booth {
     
     static String pad(String qr,int br)
     {

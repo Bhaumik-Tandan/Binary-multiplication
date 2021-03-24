@@ -57,7 +57,7 @@ public class booth {
             }
             q1=qr.charAt(p-1);
             qr=ac.charAt(ac.length()-1)+qr.substring(0,p-1);
-            ac="0"+ac.substring(0,ac.length()-1);
+            ac=ac.charAt(0)+ac.substring(0,ac.length()-1);
             System.out.printf("%20s %10s %10s %10s %5s\n","SHIFT",ac,qr,q1,--sc);
         }
 

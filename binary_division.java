@@ -1,4 +1,4 @@
-public class a {
+public class binary_division{
     static int n;
 
     static String pad(String k) {

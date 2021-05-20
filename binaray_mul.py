@@ -1,15 +1,9 @@
 from tabulate import tabulate
 def fun(a,b):
     if len(b)<len(a):
-        s="0"
-        for i in range(len(a)-len(b)-1):
-            s+="0"
-        b=s+b
+        b.zfill(len(a))
     elif len(b)>len(a):
-        s="0"
-        for i in range(len(b)-len(a)-1):
-            s+="0"
-        a=s+a
+        a.zfill(len(b))
     e=0
     i=len(a)-1
     c=0
@@ -20,9 +14,12 @@ def fun(a,b):
         i-=1
     return c,b
         
-print("19BIT0292")
+o=input("19BIT0292\n1.Binary\n2.Decimal\nEnter your choice: ")
 mul=input("ENTER THE MULTIPLICAND: ")
 mp=input("ENTER THE MULTIPLIER: ")
+if o=="2":
+    mul=str(bin(int(mul)))[2:]
+    mp=str(bin(int(mp)))[2:]
 e=0
 q=mp
 tu="0"
@@ -50,4 +47,3 @@ while i>=0:
 print(tabulate(t,["OPERATION","E","A","Q","SC"]))
 print("\nRESULT in BINARY= "+a+q)
 print("\nRESULT in DECIMAL= "+str(int(a+q,2)))
-    

@@ -1,9 +1,9 @@
 from tabulate import tabulate
 def fun(a,b):
     if len(b)<len(a):
-        b.zfill(len(a))
+        b=b.zfill(len(a))
     elif len(b)>len(a):
-        a.zfill(len(b))
+        a=a.zfill(len(b))
     e=0
     i=len(a)-1
     c=0

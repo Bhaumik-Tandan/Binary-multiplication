@@ -13,42 +13,21 @@ def fun(a,b):
         b=b[:i]+str(s)+b[i+1:]
         i-=1
     return c,b
-        
+f=1      
 o=input("19BIT0292\n1.Binary\n2.Decimal\nEnter your choice: ")
 mul=input("ENTER THE MULTIPLICAND: ")
 mp=input("ENTER THE MULTIPLIER: ")
-k=int(input("\nEnter the number of bits: "))
-f=0
-bi="0"*k
 if o=="2":
     mul=int(mul)
+    mp=int(mp)
     if mul<0:
         mul*=-1
-        _,mul=fun(str(bin(mul)[2:]),bi)
-        mul=list(mul)
-        for i in range(len(mul)):
-            if mul[i]=="0":
-                mul[i]="1"
-            else:
-                mul[i]="0"
-        _,mul=fun(mul,"1")
-        f+=1
-    else:
-        _,mul=fun(str(bin(mul))[2:],bi)             
-    mp=int(mp)
+        f*=-1
     if mp<0:
         mp*=-1
-        _,mp=fun(str(bin(mp)[2:]),bi)
-        mp=list(mp)
-        for i in range(len(mp)):
-            if mp[i]=="0":
-                mp[i]="1"
-            else:
-                mp[i]="0"
-        _,mp=fun(mp,"1")       
-        f+=1
-    else:
-         _,mp=fun(str(bin(mp))[2:],bi)           
+        f*=-1
+    mul=str(bin(mul))[2:]
+    mp=str(bin(mp))[2:]
 e=0
 q=mp
 a="0"
@@ -73,9 +52,16 @@ while i>=0:
     e=0
     t.append(["SHIFT",e,a,q,sc.zfill(len(str(bin(p))[2:]))])
 print(tabulate(t,["OPERATION","E","A","Q","SC"]))
-if f==0:
+if f==1:
     print("\nRESULT in BINARY= "+a+q)
     print("\nRESULT in DECIMAL= "+str(int(a+q,2)))
-elif f==2:
-    print("\nRESULT in BINARY= "+(a+q)[k:])
-    print("\nRESULT in DECIMAL= "+str(int((a+q)[k:],2)))
+else:
+    s=list(a+q)
+    for i in range(len(s)):
+        if s[i]=="0":
+         s[i]="1"
+        else:
+         s[i]="0"
+    _,s=fun(s,"1")
+    print("\nRESULT in BINARY= "+s)
+    print("\nRESULT in DECIMAL= "+str(int(a+q,2)*-1))

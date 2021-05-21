@@ -30,9 +30,7 @@ if o=="2":
     mp=str(bin(mp))[2:]
 e=0
 q=mp
-a="0"
-for i in range(1,len(q)):
-    a+="0"
+a="".zfill(len(q))
 i=len(q)
 sc=str(bin(i))[2:]
 t=[["","0",a,q,sc]]
